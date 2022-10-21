@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { validate } from "./validate";
 import { notify } from "./toast";
-import styles from "./SignUp.module.css"
+import styles from "./SignUp.module.css";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
@@ -56,6 +56,10 @@ const SignUp = () => {
     }
   };
 
+  const toggleClass = (errorValue, touchValue) => {
+    return errorValue && touchValue ? styles.uncomplited : styles.formInput;
+  };
+
   return (
     <div className={styles.container}>
       <form onSubmit={submitHandler} className={styles.formContainer}>
@@ -63,7 +67,7 @@ const SignUp = () => {
         <div className={styles.formField}>
           <label>Name</label>
           <input
-            className={(errors.name && touched.name) ? styles.uncomplited : styles.formInput}
+            className={toggleClass(errors.name, touched.name)}
             type="text"
             name="name"
             value={data.name}
@@ -76,7 +80,7 @@ const SignUp = () => {
         <div className={styles.formField}>
           <label>Email</label>
           <input
-            className={(errors.email && touched.email) ? styles.uncomplited : styles.formInput}
+            className={toggleClass(errors.email, touched.email)}
             type="email"
             name="email"
             value={data.email}
@@ -89,7 +93,7 @@ const SignUp = () => {
         <div className={styles.formField}>
           <label>Password</label>
           <input
-            className={(errors.password && touched.password) ? styles.uncomplited : styles.formInput}
+            className={toggleClass(errors.password, touched.password)}
             type="password"
             name="password"
             value={data.password}
@@ -104,7 +108,7 @@ const SignUp = () => {
         <div className={styles.formField}>
           <label>Confirm Password</label>
           <input
-            className={(errors.confirmPassword && touched.confirmPassword) ? styles.uncomplited : styles.formInput}
+            className={toggleClass(errors.confirmPassword, touched.confirmPassword)}
             type="password"
             name="confirmPassword"
             value={data.confirmPassword}
@@ -118,7 +122,7 @@ const SignUp = () => {
 
         <div className={styles.formField}>
           <div className={styles.checkBoxContainer}>
-          <label>I accept terms of privacy policy</label>
+            <label>I accept terms of privacy policy</label>
             <input
               type="checkbox"
               name="isAccepted"
@@ -127,7 +131,7 @@ const SignUp = () => {
               onFocus={focusHandler}
             />
           </div>
-          
+
           {errors.isAccepted && touched.isAccepted && (
             <span>{errors.isAccepted}</span>
           )}

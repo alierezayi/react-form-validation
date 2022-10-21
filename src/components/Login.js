@@ -42,6 +42,10 @@ const Login = () => {
       });
     }
   };
+  
+  const toggleClass = (errorValue, touchValue) => {
+    return errorValue && touchValue ? styles.uncomplited : styles.formInput;
+  };
 
   return (
     <div className={styles.container}>
@@ -51,11 +55,7 @@ const Login = () => {
         <div className={styles.formField}>
           <label>Email</label>
           <input
-            className={
-              errors.email && touched.email
-                ? styles.uncomplited
-                : styles.formInput
-            }
+            className={toggleClass(errors.email, touched.email)}
             type="email"
             name="email"
             value={data.email}
@@ -68,11 +68,7 @@ const Login = () => {
         <div className={styles.formField}>
           <label>Password</label>
           <input
-            className={
-              errors.password && touched.password
-                ? styles.uncomplited
-                : styles.formInput
-            }
+            className={toggleClass(errors.password, touched.password)}
             type="password"
             name="password"
             value={data.password}
